@@ -1,0 +1,366 @@
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+  <changeSet id="t_menu_permission-1" author="yourname">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="t_menu_permission"/>
+      </not>
+    </preConditions>
+
+    <createTable tableName="t_menu_permission">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="create_time" type="bigint" defaultValueNumeric="0"/>
+      <column name="update_time" type="bigint" defaultValueNumeric="0"/>
+      <column name="name" type="varchar(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="code" type="varchar(50)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="type" type="varchar(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="parent_id" type="int" defaultValueNumeric="NULL"/>
+      <column name="path" type="varchar(255)" defaultValue="NULL"/>
+      <column name="redirect" type="varchar(255)" defaultValue="NULL"/>
+      <column name="icon" type="varchar(255)" defaultValue="NULL"/>
+      <column name="component" type="varchar(255)" defaultValue="NULL"/>
+      <column name="layout" type="varchar(255)" defaultValue="NULL"/>
+      <column name="keep_alive" type="tinyint(4)" defaultValue="NULL"/>
+      <column name="method" type="varchar(255)" defaultValue="NULL"/>
+      <column name="description" type="varchar(255)" defaultValue="NULL"/>
+      <column name="can_show" type="tinyint(1)" defaultValueNumeric="1">
+        <constraints nullable="false"/>
+      </column>
+      <column name="enable" type="tinyint(1)" defaultValueNumeric="1">
+        <constraints nullable="false"/>
+      </column>
+      <column name="sort_order" type="int" defaultValueNumeric="0"/>
+    </createTable>
+
+    <createIndex indexName="uidx_menu_code" tableName="t_menu_permission" unique="true">
+      <column name="code"/>
+    </createIndex>
+
+    <insert tableName="t_menu_permission">
+      <column name="id" valueNumeric="1"/>
+      <column name="create_time" valueNumeric="1700295539"/>
+      <column name="update_time" valueNumeric="1700295539"/>
+      <column name="name" value="资源管理"/>
+      <column name="code" value="Resource_Mgt"/>
+      <column name="type" value="MENU"/>
+      <column name="parent_id" valueNumeric="2"/>
+      <column name="path" value="/pms/resource"/>
+      <column name="redirect" value="NULL"/>
+      <column name="icon" value="i-fe:list"/>
+      <column name="component" value="/src/views/pms/resource/index.vue"/>
+      <column name="layout" value="NULL"/>
+      <column name="keep_alive" value="NULL"/>
+      <column name="method" value="NULL"/>
+      <column name="description" value="NULL"/>
+      <column name="can_show" valueNumeric="1"/>
+      <column name="enable" valueNumeric="1"/>
+      <column name="sort_order" valueNumeric="1"/>
+    </insert>
+
+    <insert tableName="t_menu_permission">
+      <column name="id" valueNumeric="2"/>
+      <column name="create_time" valueNumeric="1700295539"/>
+      <column name="update_time" valueNumeric="1700295539"/>
+      <column name="name" value="系统管理"/>
+      <column name="code" value="SysMgt"/>
+      <column name="type" value="MENU"/>
+      <column name="parent_id" value="NULL"/>
+      <column name="path" value="NULL"/>
+      <column name="redirect" value="NULL"/>
+      <column name="icon" value="i-fe:grid"/>
+      <column name="component" value="NULL"/>
+      <column name="layout" value="NULL"/>
+      <column name="keep_alive" value="NULL"/>
+      <column name="method" value="NULL"/>
+      <column name="description" value="NULL"/>
+      <column name="can_show" valueNumeric="1"/>
+      <column name="enable" valueNumeric="1"/>
+      <column name="sort_order" valueNumeric="2"/>
+    </insert>
+
+    <insert tableName="t_menu_permission">
+      <column name="id" valueNumeric="3"/>
+      <column name="create_time" valueNumeric="1700295539"/>
+      <column name="update_time" valueNumeric="1700295539"/>
+      <column name="name" value="角色管理"/>
+      <column name="code" value="RoleMgt"/>
+      <column name="type" value="MENU"/>
+      <column name="parent_id" valueNumeric="2"/>
+      <column name="path" value="/pms/role"/>
+      <column name="redirect" value="NULL"/>
+      <column name="icon" value="i-fe:user-check"/>
+      <column name="component" value="/src/views/pms/role/index.vue"/>
+      <column name="layout" value="NULL"/>
+      <column name="keep_alive" value="NULL"/>
+      <column name="method" value="NULL"/>
+      <column name="description" value="NULL"/>
+      <column name="can_show" valueNumeric="1"/>
+      <column name="enable" valueNumeric="1"/>
+      <column name="sort_order" valueNumeric="2"/>
+    </insert>
+
+    <insert tableName="t_menu_permission">
+      <column name="id" valueNumeric="4"/>
+      <column name="create_time" valueNumeric="1700295539"/>
+      <column name="update_time" valueNumeric="1700295539"/>
+      <column name="name" value="用户管理"/>
+      <column name="code" value="UserMgt"/>
+      <column name="type" value="MENU"/>
+      <column name="parent_id" valueNumeric="2"/>
+      <column name="path" value="/pms/user"/>
+      <column name="redirect" value="NULL"/>
+      <column name="icon" value="i-fe:user"/>
+      <column name="component" value="/src/views/pms/user/index.vue"/>
+      <column name="layout" value="NULL"/>
+      <column name="keep_alive" valueNumeric="1"/>
+      <column name="method" value="NULL"/>
+      <column name="description" value="NULL"/>
+      <column name="can_show" valueNumeric="1"/>
+      <column name="enable" valueNumeric="1"/>
+      <column name="sort_order" valueNumeric="3"/>
+    </insert>
+
+    <insert tableName="t_menu_permission">
+      <column name="id" valueNumeric="5"/>
+      <column name="create_time" valueNumeric="1700295539"/>
+      <column name="update_time" valueNumeric="1700295539"/>
+      <column name="name" value="分配用户"/>
+      <column name="code" value="RoleUser"/>
+      <column name="type" value="MENU"/>
+      <column name="parent_id" valueNumeric="3"/>
+      <column name="path" value="/pms/role/user/:roleId"/>
+      <column name="redirect" value="NULL"/>
+      <column name="icon" value="i-fe:user-plus"/>
+      <column name="component" value="/src/views/pms/role/role-user.vue"/>
+      <column name="layout" value="full"/>
+      <column name="keep_alive" value="NULL"/>
+      <column name="method" value="NULL"/>
+      <column name="description" value="NULL"/>
+      <column name="can_show" valueNumeric="0"/>
+      <column name="enable" valueNumeric="1"/>
+      <column name="sort_order" valueNumeric="1"/>
+    </insert>
+
+    <insert tableName="t_menu_permission">
+      <column name="id" valueNumeric="6"/>
+      <column name="create_time" valueNumeric="1700295539"/>
+      <column name="update_time" valueNumeric="1700295539"/>
+      <column name="name" value="业务示例"/>
+      <column name="code" value="Demo"/>
+      <column name="type" value="MENU"/>
+      <column name="parent_id" value="NULL"/>
+      <column name="path" value="NULL"/>
+      <column name="redirect" value="NULL"/>
+      <column name="icon" value="i-fe:grid"/>
+      <column name="component" value="NULL"/>
+      <column name="layout" value="NULL"/>
+      <column name="keep_alive" value="NULL"/>
+      <column name="method" value="NULL"/>
+      <column name="description" value="NULL"/>
+      <column name="can_show" valueNumeric="1"/>
+      <column name="enable" valueNumeric="1"/>
+      <column name="sort_order" valueNumeric="1"/>
+    </insert>
+
+    <insert tableName="t_menu_permission">
+      <column name="id" valueNumeric="7"/>
+      <column name="create_time" valueNumeric="1700295539"/>
+      <column name="update_time" valueNumeric="1700295539"/>
+      <column name="name" value="图片上传"/>
+      <column name="code" value="ImgUpload"/>
+      <column name="type" value="MENU"/>
+      <column name="parent_id" valueNumeric="6"/>
+      <column name="path" value="/demo/upload"/>
+      <column name="redirect" value="NULL"/>
+      <column name="icon" value="i-fe:image"/>
+      <column name="component" value="/src/views/demo/upload/index.vue"/>
+      <column name="layout" value="NULL"/>
+      <column name="keep_alive" valueNumeric="1"/>
+      <column name="method" value="NULL"/>
+      <column name="description" value="NULL"/>
+      <column name="can_show" valueNumeric="1"/>
+      <column name="enable" valueNumeric="1"/>
+      <column name="sort_order" valueNumeric="2"/>
+    </insert>
+
+    <insert tableName="t_menu_permission">
+      <column name="id" valueNumeric="8"/>
+      <column name="create_time" valueNumeric="1700295539"/>
+      <column name="update_time" valueNumeric="1700295539"/>
+      <column name="name" value="个人资料"/>
+      <column name="code" value="UserProfile"/>
+      <column name="type" value="MENU"/>
+      <column name="parent_id" value="NULL"/>
+      <column name="path" value="/profile"/>
+      <column name="redirect" value="NULL"/>
+      <column name="icon" value="i-fe:user"/>
+      <column name="component" value="/src/views/profile/index.vue"/>
+      <column name="layout" value="NULL"/>
+      <column name="keep_alive" value="NULL"/>
+      <column name="method" value="NULL"/>
+      <column name="description" value="NULL"/>
+      <column name="can_show" valueNumeric="0"/>
+      <column name="enable" valueNumeric="1"/>
+      <column name="sort_order" valueNumeric="99"/>
+    </insert>
+
+    <insert tableName="t_menu_permission">
+      <column name="id" valueNumeric="9"/>
+      <column name="create_time" valueNumeric="1700295539"/>
+      <column name="update_time" valueNumeric="1700295539"/>
+      <column name="name" value="基础功能"/>
+      <column name="code" value="Base"/>
+      <column name="type" value="MENU"/>
+      <column name="parent_id" value="NULL"/>
+      <column name="path" value=""/>
+      <column name="redirect" value="NULL"/>
+      <column name="icon" value="i-fe:grid"/>
+      <column name="component" value="NULL"/>
+      <column name="layout" value=""/>
+      <column name="keep_alive" value="NULL"/>
+      <column name="method" value="NULL"/>
+      <column name="description" value="NULL"/>
+      <column name="can_show" valueNumeric="1"/>
+      <column name="enable" valueNumeric="1"/>
+      <column name="sort_order" valueNumeric="0"/>
+    </insert>
+
+    <insert tableName="t_menu_permission">
+      <column name="id" valueNumeric="10"/>
+      <column name="create_time" valueNumeric="1700295539"/>
+      <column name="update_time" valueNumeric="1700295539"/>
+      <column name="name" value="基础组件"/>
+      <column name="code" value="BaseComponents"/>
+      <column name="type" value="MENU"/>
+      <column name="parent_id" valueNumeric="9"/>
+      <column name="path" value="/base/components"/>
+      <column name="redirect" value="NULL"/>
+      <column name="icon" value="i-me:awesome"/>
+      <column name="component" value="/src/views/base/index.vue"/>
+      <column name="layout" value="NULL"/>
+      <column name="keep_alive" value="NULL"/>
+      <column name="method" value="NULL"/>
+      <column name="description" value="NULL"/>
+      <column name="can_show" valueNumeric="1"/>
+      <column name="enable" valueNumeric="1"/>
+      <column name="sort_order" valueNumeric="1"/>
+    </insert>
+
+    <insert tableName="t_menu_permission">
+      <column name="id" valueNumeric="11"/>
+      <column name="create_time" valueNumeric="1700295539"/>
+      <column name="update_time" valueNumeric="1700295539"/>
+      <column name="name" value="Unocss"/>
+      <column name="code" value="Unocss"/>
+      <column name="type" value="MENU"/>
+      <column name="parent_id" valueNumeric="9"/>
+      <column name="path" value="/base/unocss"/>
+      <column name="redirect" value="NULL"/>
+      <column name="icon" value="i-me:awesome"/>
+      <column name="component" value="/src/views/base/unocss.vue"/>
+      <column name="layout" value="NULL"/>
+      <column name="keep_alive" value="NULL"/>
+      <column name="method" value="NULL"/>
+      <column name="description" value="NULL"/>
+      <column name="can_show" valueNumeric="1"/>
+      <column name="enable" valueNumeric="1"/>
+      <column name="sort_order" valueNumeric="2"/>
+    </insert>
+
+    <insert tableName="t_menu_permission">
+      <column name="id" valueNumeric="12"/>
+      <column name="create_time" valueNumeric="1700295539"/>
+      <column name="update_time" valueNumeric="1700295539"/>
+      <column name="name" value="keep_alive"/>
+      <column name="code" value="keep_alive"/>
+      <column name="type" value="MENU"/>
+      <column name="parent_id" valueNumeric="9"/>
+      <column name="path" value="/base/keep-alive"/>
+      <column name="redirect" value="NULL"/>
+      <column name="icon" value="i-me:awesome"/>
+      <column name="component" value="/src/views/base/keep-alive.vue"/>
+      <column name="layout" value="NULL"/>
+      <column name="keep_alive" valueNumeric="1"/>
+      <column name="method" value="NULL"/>
+      <column name="description" value="NULL"/>
+      <column name="can_show" valueNumeric="1"/>
+      <column name="enable" valueNumeric="1"/>
+      <column name="sort_order" valueNumeric="3"/>
+    </insert>
+
+    <insert tableName="t_menu_permission">
+      <column name="id" valueNumeric="13"/>
+      <column name="create_time" valueNumeric="1700295539"/>
+      <column name="update_time" valueNumeric="1700295539"/>
+      <column name="name" value="创建新用户"/>
+      <column name="code" value="AddUser"/>
+      <column name="type" value="BUTTON"/>
+      <column name="parent_id" valueNumeric="4"/>
+      <column name="path" value="NULL"/>
+      <column name="redirect" value="NULL"/>
+      <column name="icon" value="NULL"/>
+      <column name="component" value="NULL"/>
+      <column name="layout" value="NULL"/>
+      <column name="keep_alive" value="NULL"/>
+      <column name="method" value="NULL"/>
+      <column name="description" value="NULL"/>
+      <column name="can_show" valueNumeric="1"/>
+      <column name="enable" valueNumeric="1"/>
+      <column name="sort_order" valueNumeric="1"/>
+    </insert>
+
+    <insert tableName="t_menu_permission">
+      <column name="id" valueNumeric="14"/>
+      <column name="create_time" valueNumeric="1700295539"/>
+      <column name="update_time" valueNumeric="1700295539"/>
+      <column name="name" value="图标 Icon"/>
+      <column name="code" value="Icon"/>
+      <column name="type" value="MENU"/>
+      <column name="parent_id" valueNumeric="9"/>
+      <column name="path" value="/base/icon"/>
+      <column name="redirect" value="NULL"/>
+      <column name="icon" value="i-fe:feather"/>
+      <column name="component" value="/src/views/base/unocss-icon.vue"/>
+      <column name="layout" value=""/>
+      <column name="keep_alive" value="NULL"/>
+      <column name="method" value="NULL"/>
+      <column name="description" value="NULL"/>
+      <column name="can_show" valueNumeric="1"/>
+      <column name="enable" valueNumeric="1"/>
+      <column name="sort_order" valueNumeric="0"/>
+    </insert>
+
+    <insert tableName="t_menu_permission">
+      <column name="id" valueNumeric="15"/>
+      <column name="create_time" valueNumeric="1700295539"/>
+      <column name="update_time" valueNumeric="1700295539"/>
+      <column name="name" value="MeModal"/>
+      <column name="code" value="TestModal"/>
+      <column name="type" value="MENU"/>
+      <column name="parent_id" valueNumeric="9"/>
+      <column name="path" value="/testModal"/>
+      <column name="redirect" value="NULL"/>
+      <column name="icon" value="i-me:dialog"/>
+      <column name="component" value="/src/views/base/test-modal.vue"/>
+      <column name="layout" value="NULL"/>
+      <column name="keep_alive" value="NULL"/>
+      <column name="method" value="NULL"/>
+      <column name="description" value="NULL"/>
+      <column name="can_show" valueNumeric="1"/>
+      <column name="enable" valueNumeric="1"/>
+      <column name="sort_order" valueNumeric="5"/>
+    </insert>
+  </changeSet>
+</databaseChangeLog>

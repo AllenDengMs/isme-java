@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>spirng-cloud-project-parent</artifactId>
+    <groupId>base2023.backend.cloud</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>base23-common-parent</artifactId>
+  <packaging>pom</packaging>
+  <description>所有项目通用的公共代码库</description>
+
+  <modules>
+    <module>we-commons</module>
+    <module>we-database-starter</module>
+    <module>we-cache-starter</module>
+    <module>we-web-starter</module>
+  </modules>
+</project>

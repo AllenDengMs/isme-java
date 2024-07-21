@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: classpath:db/changelog/uaa/changelog-master.xml
+  - include:
+      file: classpath:db/changelog/i18n/changelog-master.xml

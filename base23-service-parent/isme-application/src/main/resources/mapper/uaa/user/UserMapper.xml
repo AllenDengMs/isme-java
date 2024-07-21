@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.base23.uaa.business.dao.mapper.UserMapper">
+
+  <update id="updateProfile">
+    update t_profile
+    set
+        <if test="address != null and address != ''">address = #{address},</if>
+        <if test="email != null and email != ''">email = #{email},</if>
+        <if test="nickName != null and nickName != ''">nick_name = #{nickName},</if>
+        <if test="gender != null">gender = #{gender},</if>
+        update_time = #{updateTime}
+    where user_id = #{userId}
+  </update>
+
+  <update id="resetPassword">
+    update t_user
+    set password = #{password},
+        update_time = #{updateTime}
+    where id = #{id}
+  </update>
+
+  <select id="pageQueryUser" resultType="org.base23.uaa.core.domain.vo.UserItemVO">
+    select t_user.*,
+           t_profile.avatar,
+           t_profile.address,
+           t_profile.gender,
+           t_profile.email,
+           t_profile.nick_name
+    from t_user left join t_profile on t_user.id = t_profile.user_id
+    <where>
+      <if test="param.username != null and param.username != ''">
+        and t_user.username like concat('%',#{param.username}, '%')
+      </if>
+      <if test="param.enable != null">
+        and t_user.enable = #{param.enable}
+      </if>
+      <if test="param.gender != null">
+        and t_profile.gender = #{param.gender}
+      </if>
+    </where>
+  </select>
+
+</mapper>

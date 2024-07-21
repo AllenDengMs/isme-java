@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>base2023.backend.cloud</groupId>
+  <artifactId>spirng-cloud-project-parent</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>base23-common-parent</module>
+    <module>base23-service-parent</module>
+  </modules>
+
+  <properties>
+    <!-- 下面这5个属性，直接从spring-boot-starter-parent拷贝出来的，如果缺少了，可能会导致maven或idea编译出现奇怪的错误 -->
+    <java.version>21</java.version>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
+    <resource.delimiter>@</resource.delimiter>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <!--
+      SpringBoot与SpringCloud 框架的版本对应关系，请看：
+      https://spring.io/projects/spring-cloud
+
+      SpringCloud Version     Springboot Version
+      2023.0.x aka Leyton	    3.2.x
+      2022.0.x aka Kilburn	  3.0.x, 3.1.x (Starting with 2022.0.3)
+      2021.0.x aka Jubilee	  2.6.x, 2.7.x (Starting with 2021.0.3)
+      2020.0.x aka Ilford	    2.4.x, 2.5.x (Starting with 2020.0.3)
+      Hoxton	                2.2.x, 2.3.x (Starting with SR5)
+    -->
+    <spring-boot.version>3.2.5</spring-boot.version>
+    <spring-cloud.version>2023.0.1</spring-cloud.version>
+
+    <!--
+      Spring框架相关版本，怎么选择版本，请看：
+      https://spring.io/projects/spring-cloud
+      https://docs.spring.io/spring-boot/docs/3.2.5/reference/html/dependency-versions.html#appendix.dependency-versions
+      https://docs.spring.io/spring-cloud/docs/2022.0.0/reference/html/
+    -->
+    <HikariCP.version>3.4.3</HikariCP.version>
+    <jackson.version>2.15.4</jackson.version>
+    <mysql-connector.version>8.0.30</mysql-connector.version>
+    <hibernate-validator.version>8.0.1.Final</hibernate-validator.version>
+    <caffeine.version>3.1.8</caffeine.version>
+
+    <junit.version>4.12</junit.version>
+
+    <!-- 三方工具包 -->
+    <jjwt.version>0.11.5</jjwt.version>
+    <mybatis-plus.version>3.5.5</mybatis-plus.version>
+
+    <!-- pojo/vo/dto转换时用到的工具类 -->
+    <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!--
+        引入 springboot-dependencies pom 是为了管理jar包版本管理。
+        直接继承parent也是为了 引入 springboot-dependencies pom
+      -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!--
+        引入 spring-cloud-dependencies来管理版本
+        因为会用到spring-cloud-gateway，这些属于spring-cloud生态圈的中间件
+      -->
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- 本项目用到的三方jar包版本管理，统一写到这个pom.xml里面，方便deploy到maven仓库 -->
+      <!-- jwt -->
+      <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-api</artifactId>
+        <version>${jjwt.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-impl</artifactId>
+        <version>${jjwt.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-jackson</artifactId>
+        <version>${jjwt.version}</version>
+      </dependency>
+
+      <!-- 数据库相关 -->
+      <dependency>
+        <groupId>com.zaxxer</groupId>
+        <artifactId>HikariCP</artifactId>
+        <version>${HikariCP.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql-connector.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.baomidou</groupId>
+        <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+        <version>${mybatis-plus.version}</version>
+      </dependency>
+
+      <!-- Json序列化/反序列化 -->
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-annotations</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+
+      <!-- 校验Web请求参数工具类 -->
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>${hibernate-validator.version}</version>
+      </dependency>
+
+      <!-- 本地缓存 -->
+      <dependency>
+        <groupId>com.github.ben-manes.caffeine</groupId>
+        <artifactId>caffeine</artifactId>
+        <version>${caffeine.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>${spring-boot.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <!--
+    Spring Boot在下载依赖时,会遵循Maven的仓库搜索顺序:
+
+    1. 首先会在本地仓库(~/.m2/repository)查找依赖是否已下载。
+    2. 如果没有找到,则会在pom.xml中定义的<repositories>中查找。
+    3. 如果在本地和自定义仓库都找不到,则会从Maven中心仓库(central仓库)下载。
+    4. 如果在settings.xml中配置了central仓库的镜像(mirrorOf central),则会从镜像库下载。
+    5. 如果依然找不到,则会下载失败。
+  -->
+  <repositories>
+    <repository>
+      <id>public</id>
+      <name>aliyun nexus</name>
+      <url>https://maven.aliyun.com/repository/public</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>public</id>
+      <name>aliyun nexus</name>
+      <url>https://maven.aliyun.com/repository/public</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+
+</project>

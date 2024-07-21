@@ -1,0 +1,57 @@
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+  <changeSet id="t_role-1" author="yourname">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="t_role"/>
+      </not>
+    </preConditions>
+    <createTable tableName="t_role">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="create_time" type="bigint" defaultValueNumeric="0"/>
+      <column name="update_time" type="bigint" defaultValueNumeric="0"/>
+      <column name="code" type="varchar(50)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="name" type="varchar(50)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="enable" type="tinyint(1)" defaultValueNumeric="1">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+
+    <createIndex indexName="uidx_role_code" tableName="t_role" unique="true">
+      <column name="code"/>
+    </createIndex>
+
+    <createIndex indexName="uidx_role_name" tableName="t_role" unique="true">
+      <column name="name"/>
+    </createIndex>
+
+    <insert tableName="t_role">
+      <column name="id" valueNumeric="1"/>
+      <column name="create_time" valueNumeric="1700295539"/>
+      <column name="update_time" valueNumeric="1700295539"/>
+      <column name="code" value="SUPER_ADMIN"/>
+      <column name="name" value="超级管理员"/>
+      <column name="enable" valueNumeric="1"/>
+    </insert>
+
+    <insert tableName="t_role">
+      <column name="id" valueNumeric="2"/>
+      <column name="create_time" valueNumeric="1700295539"/>
+      <column name="update_time" valueNumeric="1700295539"/>
+      <column name="code" value="ROLE_QA"/>
+      <column name="name" value="质检员"/>
+      <column name="enable" valueNumeric="1"/>
+    </insert>
+  </changeSet>
+
+</databaseChangeLog>

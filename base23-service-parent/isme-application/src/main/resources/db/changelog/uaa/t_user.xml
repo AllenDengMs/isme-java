@@ -1,0 +1,44 @@
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+  <changeSet id="t_user-1" author="yourname">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="t_user"/>
+      </not>
+    </preConditions>
+    <createTable tableName="t_user">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="create_time" type="bigint" defaultValueNumeric="0"/>
+      <column name="update_time" type="bigint" defaultValueNumeric="0"/>
+      <column name="username" type="varchar(50)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="password" type="varchar(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="enable" type="tinyint(1)" defaultValueNumeric="1">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+
+    <createIndex indexName="uidx_user_username" tableName="t_user" unique="true">
+      <column name="username"/>
+    </createIndex>
+
+    <insert tableName="t_user">
+      <column name="id" valueNumeric="1"/>
+      <column name="create_time" valueNumeric="1700295539"/>
+      <column name="update_time" valueNumeric="1700295539"/>
+      <column name="username" value="admin"/>
+      <column name="password" value="$2a$10$FsAafxTTVVGXfIkJqvaiV.1vPfq4V9HW298McPldJgO829PR52a56"/>
+      <column name="enable" valueNumeric="1"/>
+    </insert>
+  </changeSet>
+
+</databaseChangeLog>

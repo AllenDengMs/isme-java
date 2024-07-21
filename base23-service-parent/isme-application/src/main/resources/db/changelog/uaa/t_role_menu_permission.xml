@@ -1,0 +1,68 @@
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+  <changeSet id="t_role_menu_permission-1" author="author">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="t_role_menu_permission"/>
+      </not>
+    </preConditions>
+
+    <createTable tableName="t_role_menu_permission">
+      <column name="role_id" type="int">
+        <constraints primaryKey="true" primaryKeyName="pk_t_role_menu_permission" nullable="false"/>
+      </column>
+      <column name="permission_id" type="int">
+        <constraints primaryKey="true" primaryKeyName="pk_t_role_menu_permission" nullable="false"/>
+      </column>
+    </createTable>
+
+    <insert tableName="t_role_menu_permission">
+      <column name="role_id" valueNumeric="2" />
+      <column name="permission_id" valueNumeric="1" />
+    </insert>
+    <insert tableName="t_role_menu_permission">
+      <column name="role_id" valueNumeric="2" />
+      <column name="permission_id" valueNumeric="2" />
+    </insert>
+    <insert tableName="t_role_menu_permission">
+      <column name="role_id" valueNumeric="2" />
+      <column name="permission_id" valueNumeric="3" />
+    </insert>
+    <insert tableName="t_role_menu_permission">
+      <column name="role_id" valueNumeric="2" />
+      <column name="permission_id" valueNumeric="4" />
+    </insert>
+    <insert tableName="t_role_menu_permission">
+      <column name="role_id" valueNumeric="2" />
+      <column name="permission_id" valueNumeric="5" />
+    </insert>
+    <insert tableName="t_role_menu_permission">
+      <column name="role_id" valueNumeric="2" />
+      <column name="permission_id" valueNumeric="9" />
+    </insert>
+    <insert tableName="t_role_menu_permission">
+      <column name="role_id" valueNumeric="2" />
+      <column name="permission_id" valueNumeric="10" />
+    </insert>
+    <insert tableName="t_role_menu_permission">
+      <column name="role_id" valueNumeric="2" />
+      <column name="permission_id" valueNumeric="11" />
+    </insert>
+    <insert tableName="t_role_menu_permission">
+      <column name="role_id" valueNumeric="2" />
+      <column name="permission_id" valueNumeric="12" />
+    </insert>
+    <insert tableName="t_role_menu_permission">
+      <column name="role_id" valueNumeric="2" />
+      <column name="permission_id" valueNumeric="14" />
+    </insert>
+    <insert tableName="t_role_menu_permission">
+      <column name="role_id" valueNumeric="2" />
+      <column name="permission_id" valueNumeric="15" />
+    </insert>
+  </changeSet>
+</databaseChangeLog>

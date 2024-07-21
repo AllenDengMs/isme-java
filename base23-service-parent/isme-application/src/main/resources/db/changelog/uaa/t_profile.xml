@@ -1,0 +1,43 @@
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+  <changeSet id="t_profile-1" author="author">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="t_profile"/>
+      </not>
+    </preConditions>
+    <createTable tableName="t_profile">
+      <column name="id" type="bigint" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="create_time" type="bigint" defaultValueNumeric="0"/>
+      <column name="update_time" type="bigint" defaultValueNumeric="0"/>
+      <column name="gender" type="int" defaultValueNumeric="NULL" />
+      <column name="avatar" type="varchar(255)" defaultValue="'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80'">
+        <constraints nullable="false" />
+      </column>
+      <column name="address" type="varchar(255)" defaultValue="NULL" />
+      <column name="email" type="varchar(255)" defaultValue="NULL" />
+      <column name="user_id" type="bigint">
+        <constraints nullable="false" unique="true" />
+      </column>
+      <column name="nick_name" type="varchar(50)" defaultValue="NULL" />
+    </createTable>
+
+    <insert tableName="t_profile">
+      <column name="id" valueNumeric="1" />
+      <column name="create_time" valueNumeric="1700295539" />
+      <column name="update_time" valueNumeric="1700295539" />
+      <column name="gender" value="NULL" />
+      <column name="avatar" value="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80" />
+      <column name="address" value="NULL" />
+      <column name="email" value="NULL" />
+      <column name="user_id" valueNumeric="1" />
+      <column name="nick_name" value="Admin" />
+    </insert>
+  </changeSet>
+</databaseChangeLog>
