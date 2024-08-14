@@ -25,6 +25,7 @@ import org.base23.uaa.core.domain.dto.UpdateProfileParam;
 import org.base23.uaa.core.domain.dto.UpdateUserParam;
 import org.base23.uaa.core.domain.dto.UserBindRoleParam;
 import org.base23.uaa.core.domain.dto.UserQueryBuilder;
+import org.base23.uaa.core.domain.entity.Profile;
 import org.base23.uaa.core.domain.entity.Role;
 import org.base23.uaa.core.domain.entity.User;
 import org.base23.uaa.core.domain.entity.UserRole;
@@ -34,6 +35,8 @@ import org.base23.uaa.core.domain.vo.UserItemVO;
 import org.base23.uaa.core.exception.UaaExceptions;
 import org.base23.uaa.core.util.LoginSessionTool;
 import org.base23.web.exception.Exceptions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -122,6 +125,9 @@ public class UserServiceImpl implements UserService {
     return Pages.result(page);
   }
 
+  @Autowired
+  private ApplicationEventPublisher applicationEventPublisher;
+
   @Transactional
   @Override
   public void addUser(AddUserParam param) {
@@ -137,6 +143,12 @@ public class UserServiceImpl implements UserService {
     user.setPassword(passwordEncoder.encode(param.getPassword()));
     user.setEnable(param.isEnable());
     userRepository.save(user);
+
+    Profile profile = new Profile();
+    profile.setUserId(user.getId());
+    profile.setCreateTime(now);
+    profile.setUpdateTime(now);
+    profileRepository.save(profile);
 
     List<UserRole> userRoles = new ArrayList<>();
     for (Long roleId : param.getRoleIds()) {
